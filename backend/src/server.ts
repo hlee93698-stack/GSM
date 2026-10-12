@@ -38,9 +38,11 @@ app.use("/api", apiRouter);
 const httpServer = http.createServer(app);
 initSocketGateway(httpServer);
 
-httpServer.listen(PORT, "127.0.0.1", () => {
-  console.log(`🚀 [QSM Backend Server] Đang chạy tại http://127.0.0.1:${PORT}`);
-  console.log(`   - Health check: http://127.0.0.1:${PORT}/api/health`);
+const HOST = process.env.HOST || "0.0.0.0";
+
+httpServer.listen(PORT, HOST, () => {
+  console.log(`🚀 [QSM Backend Server] Đang chạy tại http://${HOST}:${PORT}`);
+  console.log(`   - Health check: /api/health`);
   console.log(`   - Admin mặc định: admin / admin`);
 });
 
